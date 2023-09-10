@@ -4,6 +4,7 @@ import {Colors} from 'react-native/Libraries/NewAppScreen';
 import {Provider} from 'react-redux';
 import store, {persistor} from '../configs/store';
 import {PersistGate} from 'redux-persist/integration/react';
+import RootStack from './RootStack';
 
 function App(): JSX.Element {
   const isDarkMode = useColorScheme() === 'dark';
@@ -19,6 +20,7 @@ function App(): JSX.Element {
           barStyle={isDarkMode ? 'light-content' : 'dark-content'}
           backgroundColor={backgroundStyle.backgroundColor}
         />
+        <RootStack />
       </PersistGate>
     </Provider>
   );
