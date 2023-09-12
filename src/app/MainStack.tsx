@@ -7,7 +7,9 @@ export const Main = createStackNavigator();
 
 const MainStack = () => {
   return (
-    <Main.Navigator initialRouteName="TabStack">
+    <Main.Navigator
+      initialRouteName="TabStack"
+      screenOptions={{headerShown: false}}>
       <Main.Screen name="TabStack" component={TabStack} />
       <Main.Screen name="Home" component={Home} />
     </Main.Navigator>

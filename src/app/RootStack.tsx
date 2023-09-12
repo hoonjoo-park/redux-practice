@@ -9,7 +9,7 @@ import {NavigationContainer} from '@react-navigation/native';
 const RootStack = () => {
   return (
     <NavigationContainer>
-      <Root.Navigator>
+      <Root.Navigator screenOptions={{headerShown: false}}>
         <Root.Screen name="MainStack" component={MainStack} />
       </Root.Navigator>
     </NavigationContainer>

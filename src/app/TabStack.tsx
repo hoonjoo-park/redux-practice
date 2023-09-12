@@ -8,7 +8,9 @@ const Tab = createBottomTabNavigator();
 
 const TabStack = () => {
   return (
-    <Tab.Navigator initialRouteName="HomeTab">
+    <Tab.Navigator
+      initialRouteName="HomeTab"
+      screenOptions={{headerShown: false}}>
       <Tab.Screen name="HomeTab" component={Home} />
       <Tab.Screen name="Result" component={Result} />
       <Tab.Screen name="MyProfile" component={MyProfile} />
