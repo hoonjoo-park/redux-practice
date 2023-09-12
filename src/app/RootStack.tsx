@@ -4,12 +4,15 @@ const Root = createStackNavigator();
 
 import React from 'react';
 import MainStack from './MainStack';
+import {NavigationContainer} from '@react-navigation/native';
 
 const RootStack = () => {
   return (
-    <Root.Navigator>
-      <Root.Screen name="MainStack" component={MainStack} />
-    </Root.Navigator>
+    <NavigationContainer>
+      <Root.Navigator>
+        <Root.Screen name="MainStack" component={MainStack} />
+      </Root.Navigator>
+    </NavigationContainer>
   );
 };
 

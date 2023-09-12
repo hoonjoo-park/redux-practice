@@ -7,11 +7,9 @@ export const Main = createStackNavigator();
 
 const MainStack = () => {
   return (
-    <Main.Navigator>
-      <Main.Navigator initialRouteName="TabStack">
-        <Main.Screen name="TabStack" component={TabStack} />
-        <Main.Screen name="Home" component={Home} />
-      </Main.Navigator>
+    <Main.Navigator initialRouteName="TabStack">
+      <Main.Screen name="TabStack" component={TabStack} />
+      <Main.Screen name="Home" component={Home} />
     </Main.Navigator>
   );
 };
