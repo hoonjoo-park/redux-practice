@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {memo, useState} from 'react';
 import {
   SafeAreaView,
   ScrollView,
@@ -8,17 +8,44 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
+import useProfile from '../hooks/useProfile';
 
 const Home = () => {
-  const handlePressSaveNickname = () => {};
+  const {profile, updateProfile} = useProfile();
 
-  const handlePressSaveMBTI = () => {};
+  const [nickname, setNickname] = useState(profile.nickname);
+  const [mbti, setMbti] = useState(profile.mbti);
+  const [friendCount, setFriendCount] = useState(0);
+
+  const handlePressSaveNickname = () => {
+    updateProfile(nickname, profile.mbti);
+  };
+
+  const handlePressSaveMBTI = () => {
+    updateProfile(profile.nickname, mbti);
+  };
+
+  const onChangeNickname = (text: string) => {
+    setNickname(text);
+  };
+
+  const onChangeMBTI = (text: string) => {
+    setMbti(text.toUpperCase());
+  };
 
   const handlePressPlusMinusButton = (key: 'plus' | 'minus') => {
     switch (key) {
       case 'plus':
+        setFriendCount(prev => prev + 1);
         break;
       case 'minus':
+        setFriendCount(prev => {
+          if (prev === 0) {
+            return 0;
+          } else {
+            return prev - 1;
+          }
+        });
         break;
     }
   };
@@ -33,6 +60,8 @@ const Home = () => {
               placeholder="닉네임을 입력하세요"
               placeholderTextColor="#888"
               style={styles.textInputStyle}
+              value={nickname}
+              onChangeText={onChangeNickname}
             />
             <TouchableOpacity
               style={styles.saveButton}
@@ -49,6 +78,8 @@ const Home = () => {
               placeholder="MBTI를 입력하세요"
               placeholderTextColor="#888"
               style={styles.textInputStyle}
+              value={mbti}
+              onChangeText={onChangeMBTI}
             />
             <TouchableOpacity
               style={styles.saveButton}
@@ -61,11 +92,9 @@ const Home = () => {
         <View>
           <Text style={styles.sectionLabel}>친구 수</Text>
           <View style={styles.inputContainer}>
-            <TextInput
-              defaultValue="0"
-              keyboardType="number-pad"
-              style={styles.textInputStyle}
-            />
+            <View style={styles.friendCountContainer}>
+              <Text>{friendCount}</Text>
+            </View>
             <TouchableOpacity
               style={styles.plusMinusButton}
               onPress={() => handlePressPlusMinusButton('minus')}>
@@ -127,6 +156,16 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: '700',
   },
+  friendCountContainer: {
+    height: 35,
+    justifyContent: 'center',
+    flex: 1,
+    paddingHorizontal: 12,
+    paddingVertical: 5,
+    borderWidth: 1,
+    borderColor: '#888',
+    borderRadius: 8,
+  },
   plusMinusButton: {
     height: 35,
     width: 50,
@@ -140,4 +179,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Home;
+export default memo(Home);
