@@ -9,17 +9,6 @@ import Images from '../images';
 const Tab = createBottomTabNavigator();
 
 const TabStack = () => {
-  const getTabBarLabel = (route: any) => {
-    switch (route.name) {
-      case 'HomeTab':
-        return <Text>홈</Text>;
-      case 'Result':
-        return <Text>결과</Text>;
-      case 'MyProfile':
-        return <Text>프로필</Text>;
-    }
-  };
-
   const getTabBarIcon = (route: any) => {
     switch (route.name) {
       case 'HomeTab':
@@ -36,12 +25,35 @@ const TabStack = () => {
       initialRouteName="HomeTab"
       screenOptions={({route}) => ({
         headerShown: false,
-        tabBarLabel: () => getTabBarLabel(route),
         tabBarIcon: () => getTabBarIcon(route),
       })}>
-      <Tab.Screen name="HomeTab" component={Home} />
-      <Tab.Screen name="Result" component={Result} />
-      <Tab.Screen name="MyProfile" component={MyProfile} />
+      <Tab.Screen
+        name="HomeTab"
+        component={Home}
+        options={{
+          tabBarLabel: ({focused}) => (
+            <Text style={{color: focused ? '#30A9DE' : '#000'}}>홈</Text>
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Result"
+        component={Result}
+        options={{
+          tabBarLabel: ({focused}) => (
+            <Text style={{color: focused ? '#30A9DE' : '#000'}}>결과</Text>
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="MyProfile"
+        component={MyProfile}
+        options={{
+          tabBarLabel: ({focused}) => (
+            <Text style={{color: focused ? '#30A9DE' : '#000'}}>프로필</Text>
+          ),
+        }}
+      />
     </Tab.Navigator>
   );
 };
