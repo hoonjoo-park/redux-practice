@@ -64,6 +64,7 @@ const TabStack = () => {
   return (
     <Tab.Navigator
       initialRouteName="HomeTab"
+      sceneContainerStyle={styles.sceneContainerStyle}
       screenOptions={{
         headerShown: false,
       }}>
@@ -96,6 +97,9 @@ const TabStack = () => {
 };
 
 const styles = StyleSheet.create({
+  sceneContainerStyle: {
+    backgroundColor: '#fff',
+  },
   tabBarIcon: {
     width: 15,
     height: 15,
