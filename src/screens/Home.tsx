@@ -31,6 +31,7 @@ const Home = () => {
           <View style={styles.inputContainer}>
             <TextInput
               placeholder="닉네임을 입력하세요"
+              placeholderTextColor="#888"
               style={styles.textInputStyle}
             />
             <TouchableOpacity
@@ -46,6 +47,7 @@ const Home = () => {
           <View style={styles.inputContainer}>
             <TextInput
               placeholder="MBTI를 입력하세요"
+              placeholderTextColor="#888"
               style={styles.textInputStyle}
             />
             <TouchableOpacity
