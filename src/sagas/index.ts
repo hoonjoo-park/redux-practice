@@ -1,7 +1,8 @@
-import {all} from 'redux-saga/effects';
+import {all, call} from 'redux-saga/effects';
+import watchProfileSaga from './profile';
 
 function* rootSaga() {
-  yield all([]);
+  yield all([call(watchProfileSaga)]);
 }
 
 export default rootSaga;
