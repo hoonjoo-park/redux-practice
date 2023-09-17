@@ -9,13 +9,15 @@ import {
   View,
 } from 'react-native';
 import useProfile from '../hooks/useProfile';
+import useFriend from '../hooks/useFriend';
 
 const Home = () => {
   const {profile, updateProfile} = useProfile();
+  const {friendCount, updateFriendCount} = useFriend();
 
   const [nickname, setNickname] = useState(profile.nickname);
   const [mbti, setMbti] = useState(profile.mbti);
-  const [friendCount, setFriendCount] = useState(0);
+  const [myFriendCount, setMyFriendCount] = useState(friendCount);
 
   const handlePressSaveNickname = () => {
     updateProfile(nickname, profile.mbti);
@@ -36,10 +38,14 @@ const Home = () => {
   const handlePressPlusMinusButton = (key: 'plus' | 'minus') => {
     switch (key) {
       case 'plus':
-        setFriendCount(prev => prev + 1);
+        updateFriendCount(friendCount + 1);
+        setMyFriendCount(prev => prev + 1);
         break;
       case 'minus':
-        setFriendCount(prev => {
+        const newFriendCount = friendCount === 0 ? 0 : friendCount - 1;
+
+        updateFriendCount(newFriendCount);
+        setMyFriendCount(prev => {
           if (prev === 0) {
             return 0;
           } else {
@@ -93,7 +99,7 @@ const Home = () => {
           <Text style={styles.sectionLabel}>친구 수</Text>
           <View style={styles.inputContainer}>
             <View style={styles.friendCountContainer}>
-              <Text>{friendCount}</Text>
+              <Text>{myFriendCount}</Text>
             </View>
             <TouchableOpacity
               style={styles.plusMinusButton}
