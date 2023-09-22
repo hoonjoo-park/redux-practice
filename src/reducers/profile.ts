@@ -4,6 +4,7 @@ import * as profileActions from '../actions/profile';
 
 interface ProfileState {
   profile: Profile;
+  isLoading: boolean;
   error?: any;
 }
 
@@ -12,6 +13,7 @@ const initialProfile: ProfileState = {
     nickname: '',
     mbti: '',
   },
+  isLoading: false,
   error: undefined,
 };
 
@@ -23,26 +25,26 @@ export default function profileReducer(
 ) {
   switch (action.type) {
     case getType(profileActions.getProfile.request): {
-      return state;
+      return {...state, isLoading: true};
     }
     case getType(profileActions.getProfile.success): {
       const profile = action.payload;
-      return {...state, profile};
+      return {...state, profile, isLoading: false};
     }
     case getType(profileActions.getProfile.failure): {
       const error = action.payload;
-      return {...state, error};
+      return {...state, error, isLoading: false};
     }
     case getType(profileActions.updateProfile.request): {
-      return state;
+      return {...state, isLoading: true};
     }
     case getType(profileActions.updateProfile.success): {
       const profile = action.payload;
-      return {...state, profile};
+      return {...state, profile, isLoading: false};
     }
     case getType(profileActions.updateProfile.failure): {
       const error = action.payload;
-      return {...state, error};
+      return {...state, error, isLoading: false};
     }
     default: {
       return state;
